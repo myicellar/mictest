@@ -1,0 +1,36 @@
+task wrapper(type: Wrapper) {
+    gradleVersion = '2.6'
+}
+
+group 'mictest'
+version '0.1'
+
+
+
+apply plugin: 'io.ratpack.ratpack-java'
+apply plugin: 'idea'
+apply plugin: 'com.github.johnrengelman.shadow'
+
+sourceCompatibility = 1.8
+
+
+repositories {
+    jcenter()
+}
+
+mainClassName = "io.mic.TestLogic"
+
+buildscript {
+    repositories {
+        jcenter()
+    }
+    dependencies {
+        classpath "io.ratpack:ratpack-gradle:1.0.0-rc-3"
+        classpath "com.github.jengelman.gradle.plugins:shadow:1.2.2"
+    }
+}
+
+dependencies {
+    runtime "org.slf4j:slf4j-simple:1.7.12"
+    compile ratpack.dependency("hikari")
+}
