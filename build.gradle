@@ -32,5 +32,6 @@ buildscript {
 
 dependencies {
     runtime "org.slf4j:slf4j-simple:1.7.12"
+    runtime "org.postgresql:postgresql:9.3-1103-jdbc41"
     compile ratpack.dependency("hikari")
 }
