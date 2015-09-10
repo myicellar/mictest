@@ -23,7 +23,8 @@ public class TestLogic {
         public void onStart(StartEvent startEvent) throws Exception {
             DataSource dataSource = startEvent.getRegistry().get(DataSource.class);
             try (Connection connection = dataSource.getConnection()) {
-                connection.createStatement().execute("select 1");
+                //connection.createStatement().executeUpdate("");
+                connection.createStatement().execute("");
             }
         }
     }
@@ -33,16 +34,21 @@ public class TestLogic {
             RatpackServer.start(server -> server
                             .serverConfig(
                                     ServerConfig.embedded()
-                                            .address(InetAddress.getByName("188.166.241.7"))
-                                            .port(8080)
-                                            .threads(2)
+                                    //.address(InetAddress.getByName("localhost"))
+                                    //.port(8080)
+                                    //.threads(2)
                             )
                             .registry(ratpack.guice.Guice.registry(db -> db
                                                     .module(HikariModule.class, hikariConfig -> {
-                                                        hikariConfig.setDataSourceClassName("org.postgresql.Driver");
-                                                        hikariConfig.setUsername("postgres");
-                                                        hikariConfig.setPassword("Mcellar2015");
-                                                        hikariConfig.setJdbcUrl("jdbc:postgresql://188.166.254.184:5432/cellardb");
+                                                        hikariConfig.setDataSourceClassName("org.postgresql.ds.PGSimpleDataSource");
+                                                        //hikariConfig.setUsername("postgres");
+                                                        //hikariConfig.setPassword("Mcellar2015");
+                                                        hikariConfig.addDataSourceProperty("serverName", "188.166.254.184");
+                                                        hikariConfig.addDataSourceProperty("portNumber", "5432");
+                                                        hikariConfig.addDataSourceProperty("databaseName", "cellardb");
+                                                        hikariConfig.addDataSourceProperty("user","postgres");
+                                                        hikariConfig.addDataSourceProperty("password","Mcellar2015");
+                                                        //hikariConfig.setJdbcUrl("jdbc:postgresql://188.166.254.184:5432/cellardb");
                                                         hikariConfig.setConnectionTestQuery("select 1");
                                                     })
                                     )
@@ -50,17 +56,17 @@ public class TestLogic {
                             .handlers(chain -> chain
                                             .get(ctx -> ctx.render("Hello World!"))
                                             .get(":name", ctx -> ctx.render("Hello " + ctx.getPathTokens().get("name") + "!"))
-                                    .get("catg/:idd", ctx ->
-                                        Blocking.get(() -> {
-                                            try (Connection connection = ctx.get(DataSource.class).getConnection()) {
-                                                PreparedStatement statement = connection.prepareStatement("select Description from categories where categories_id = ?");
-                                                statement.setInt(1, Integer.parseInt(ctx.getPathTokens().get("idd")));
-                                                ResultSet resultSet = statement.executeQuery();
-                                                resultSet.next();
-                                                return "Hellow PostgreSQL: " + resultSet.getString(1);
-                                            }
-                                        }).then(ctx::render)
-                                    )
+                                            .get("catg/:idd", ctx ->
+                                                            Blocking.get(() -> {
+                                                                try (Connection connection = ctx.get(DataSource.class).getConnection()) {
+                                                                    PreparedStatement statement = connection.prepareStatement("select Description from categories where categories_id = ?");
+                                                                    statement.setInt(1, Integer.parseInt(ctx.getPathTokens().get("idd")));
+                                                                    ResultSet resultSet = statement.executeQuery();
+                                                                    resultSet.next();
+                                                                    return "Hellow PostgreSQL: " + resultSet.getString(1);
+                                                                }
+                                                            }).then(ctx::render)
+                                            )
                             )
             );
         }catch (Exception e){
