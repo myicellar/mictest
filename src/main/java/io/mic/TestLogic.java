@@ -50,11 +50,11 @@ public class TestLogic {
                             .handlers(chain -> chain
                                             .get(ctx -> ctx.render("Hello World!"))
                                             .get(":name", ctx -> ctx.render("Hello " + ctx.getPathTokens().get("name") + "!"))
-                                    .get("wine/:idd", ctx ->
+                                    .get("catg/:idd", ctx ->
                                         Blocking.get(() -> {
                                             try (Connection connection = ctx.get(DataSource.class).getConnection()) {
                                                 PreparedStatement statement = connection.prepareStatement("select Description from categories where categories_id = ?");
-                                                statement.setInt(1, 1);
+                                                statement.setInt(1, Integer.parseInt(ctx.getPathTokens().get("idd")));
                                                 ResultSet resultSet = statement.executeQuery();
                                                 resultSet.next();
                                                 return "Hellow PostgreSQL: " + resultSet.getString(1);
