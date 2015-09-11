@@ -1,6 +1,15 @@
 package io.mic;
 
 import com.google.inject.Guice;
+import db.jooq.Tables;
+import db.jooq.tables.pojos.Categories;
+import db.jooq.tables.pojos.WineMaster;
+import db.jooq.tables.pojos.Winery;
+import org.jooq.DSLContext;
+import org.jooq.Record;
+import org.jooq.Result;
+import org.jooq.SQLDialect;
+import org.jooq.impl.DSL;
 import ratpack.exec.Blocking;
 import ratpack.hikari.HikariModule;
 import ratpack.server.RatpackServer;
@@ -9,10 +18,14 @@ import ratpack.server.Service;
 import ratpack.server.StartEvent;
 
 import javax.sql.DataSource;
+import javax.xml.crypto.Data;
 import java.net.InetAddress;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.List;
+
+import static ratpack.jackson.Jackson.json;
 
 /**
  * Created by lwbu on 15-9-10.
@@ -55,18 +68,38 @@ public class TestLogic {
                             )
                             .handlers(chain -> chain
                                             .get(ctx -> ctx.render("Hello World!"))
-                                            .get(":name", ctx -> ctx.render("Hello " + ctx.getPathTokens().get("name") + "!"))
-                                            .get("catg/:idd", ctx ->
+                                            .get("catg", ctx ->
                                                             Blocking.get(() -> {
                                                                 try (Connection connection = ctx.get(DataSource.class).getConnection()) {
-                                                                    PreparedStatement statement = connection.prepareStatement("select Description from categories where categories_id = ?");
-                                                                    statement.setInt(1, Integer.parseInt(ctx.getPathTokens().get("idd")));
-                                                                    ResultSet resultSet = statement.executeQuery();
-                                                                    resultSet.next();
-                                                                    return "Hellow PostgreSQL: " + resultSet.getString(1);
+                                                                    DSLContext dslContext = DSL.using(connection, SQLDialect.POSTGRES_9_3);
+                                                                    List<Categories> result = dslContext.select().from(Tables.CATEGORIES).fetchInto(Categories.class);
+                                                                    connection.close();
+                                                                    return json(result);
                                                                 }
                                                             }).then(ctx::render)
                                             )
+                                            .get("wine", ctx ->
+                                                            Blocking.get(() -> {
+                                                                try (Connection connection = ctx.get(DataSource.class).getConnection()) {
+                                                                    DSLContext dslContext = DSL.using(connection, SQLDialect.POSTGRES_9_3);
+                                                                    List<WineMaster> result = dslContext.select().from(Tables.WINE_MASTER).maxRows(30).fetchInto(WineMaster.class);
+                                                                    connection.close();
+                                                                    return json(result);
+                                                                }
+                                                            }).then(ctx::render)
+                                            )
+                                            .get(":name", ctx -> ctx.render("Hello " + ctx.getPathTokens().get("name").toUpperCase() + "! What's on your mind??"))
+//                                            .get("catg/:idd", ctx ->
+//                                                            Blocking.get(() -> {
+//                                                                try (Connection connection = ctx.get(DataSource.class).getConnection()) {
+//                                                                    PreparedStatement statement = connection.prepareStatement("select Description from categories where categories_id = ?");
+//                                                                    statement.setInt(1, Integer.parseInt(ctx.getPathTokens().get("idd")));
+//                                                                    ResultSet resultSet = statement.executeQuery();
+//                                                                    resultSet.next();
+//                                                                    return "Hellow PostgreSQL: " + resultSet.getString(1);
+//                                                                }
+//                                                            }).then(ctx::render)
+//                                            )
                             )
             );
         }catch (Exception e){
