@@ -74,12 +74,13 @@ jooq {
                 relations = false
                 deprecated = false
                 records = false
+                generatedAnnotation = false
                 immutablePojos = true
-                fluentSetters = true
+                fluentSetters = false
                 // ...
             }
             target {
-                packageName = 'db.jooq'
+                packageName = 'dbq'
                 directory = 'src/main/jooqauto'
             }
         }
