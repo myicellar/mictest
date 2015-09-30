@@ -7,6 +7,7 @@ package dbq.tables.pojos;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.sql.Date;
+import java.util.UUID;
 
 
 /**
@@ -15,9 +16,9 @@ import java.sql.Date;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class UserWineReview implements Serializable {
 
-	private static final long serialVersionUID = -1072890898;
+	private static final long serialVersionUID = 1286116653;
 
-	private final Integer    userId;
+	private final UUID       userId;
 	private final Integer    wineId;
 	private final Date       reviewDate;
 	private final BigDecimal rating;
@@ -28,6 +29,7 @@ public class UserWineReview implements Serializable {
 	private final Integer    tannin;
 	private final Integer    acidity;
 	private final Integer    finish;
+	private final Integer    sortSeq;
 
 	public UserWineReview(UserWineReview value) {
 		this.userId = value.userId;
@@ -41,10 +43,11 @@ public class UserWineReview implements Serializable {
 		this.tannin = value.tannin;
 		this.acidity = value.acidity;
 		this.finish = value.finish;
+		this.sortSeq = value.sortSeq;
 	}
 
 	public UserWineReview(
-		Integer    userId,
+		UUID       userId,
 		Integer    wineId,
 		Date       reviewDate,
 		BigDecimal rating,
@@ -54,7 +57,8 @@ public class UserWineReview implements Serializable {
 		Integer    alcohol,
 		Integer    tannin,
 		Integer    acidity,
-		Integer    finish
+		Integer    finish,
+		Integer    sortSeq
 	) {
 		this.userId = userId;
 		this.wineId = wineId;
@@ -67,9 +71,10 @@ public class UserWineReview implements Serializable {
 		this.tannin = tannin;
 		this.acidity = acidity;
 		this.finish = finish;
+		this.sortSeq = sortSeq;
 	}
 
-	public Integer getUserId() {
+	public UUID getUserId() {
 		return this.userId;
 	}
 
@@ -111,5 +116,9 @@ public class UserWineReview implements Serializable {
 
 	public Integer getFinish() {
 		return this.finish;
+	}
+
+	public Integer getSortSeq() {
+		return this.sortSeq;
 	}
 }

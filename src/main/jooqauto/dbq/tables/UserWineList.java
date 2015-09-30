@@ -7,6 +7,7 @@ package dbq.tables;
 import dbq.Public;
 
 import java.sql.Timestamp;
+import java.util.UUID;
 
 import org.jooq.Field;
 import org.jooq.Record;
@@ -21,7 +22,7 @@ import org.jooq.impl.TableImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class UserWineList extends TableImpl<Record> {
 
-	private static final long serialVersionUID = 431792175;
+	private static final long serialVersionUID = 2079123091;
 
 	/**
 	 * The reference instance of <code>public.user_wine_list</code>
@@ -39,7 +40,7 @@ public class UserWineList extends TableImpl<Record> {
 	/**
 	 * The column <code>public.user_wine_list.user_id</code>.
 	 */
-	public final TableField<Record, Integer> USER_ID = createField("user_id", org.jooq.impl.SQLDataType.INTEGER, this, "");
+	public final TableField<Record, UUID> USER_ID = createField("user_id", org.jooq.impl.SQLDataType.UUID, this, "");
 
 	/**
 	 * The column <code>public.user_wine_list.wine_id</code>.
@@ -60,6 +61,11 @@ public class UserWineList extends TableImpl<Record> {
 	 * The column <code>public.user_wine_list.last_update</code>.
 	 */
 	public final TableField<Record, Timestamp> LAST_UPDATE = createField("last_update", org.jooq.impl.SQLDataType.TIMESTAMP, this, "");
+
+	/**
+	 * The column <code>public.user_wine_list.sort_seq</code>.
+	 */
+	public final TableField<Record, Integer> SORT_SEQ = createField("sort_seq", org.jooq.impl.SQLDataType.INTEGER, this, "");
 
 	/**
 	 * Create a <code>public.user_wine_list</code> table reference

@@ -6,6 +6,8 @@ package dbq.tables;
 
 import dbq.Public;
 
+import java.util.UUID;
+
 import org.jooq.Field;
 import org.jooq.Record;
 import org.jooq.Table;
@@ -19,7 +21,7 @@ import org.jooq.impl.TableImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class UserProfile extends TableImpl<Record> {
 
-	private static final long serialVersionUID = 1812364640;
+	private static final long serialVersionUID = 1582111637;
 
 	/**
 	 * The reference instance of <code>public.user_profile</code>
@@ -37,7 +39,7 @@ public class UserProfile extends TableImpl<Record> {
 	/**
 	 * The column <code>public.user_profile.user_id</code>.
 	 */
-	public final TableField<Record, Integer> USER_ID = createField("user_id", org.jooq.impl.SQLDataType.INTEGER, this, "");
+	public final TableField<Record, UUID> USER_ID = createField("user_id", org.jooq.impl.SQLDataType.UUID, this, "");
 
 	/**
 	 * The column <code>public.user_profile.username</code>.

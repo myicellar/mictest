@@ -9,10 +9,14 @@ import dbq.tables.CategoriesType;
 import dbq.tables.Country;
 import dbq.tables.Grape;
 import dbq.tables.UserAcct;
-import dbq.tables.UserCellarList;
 import dbq.tables.UserProfile;
+import dbq.tables.UserSession;
 import dbq.tables.UserWineList;
 import dbq.tables.UserWineReview;
+import dbq.tables.VUserCellarList;
+import dbq.tables.VUserReview;
+import dbq.tables.VUserWishlist;
+import dbq.tables.VWineDetail;
 import dbq.tables.Wine;
 import dbq.tables.WineMaster;
 import dbq.tables.WineRating;
@@ -56,14 +60,14 @@ public class Tables {
 	public static final UserAcct USER_ACCT = dbq.tables.UserAcct.USER_ACCT;
 
 	/**
-	 * The table public.user_cellar_list
-	 */
-	public static final UserCellarList USER_CELLAR_LIST = dbq.tables.UserCellarList.USER_CELLAR_LIST;
-
-	/**
 	 * The table public.user_profile
 	 */
 	public static final UserProfile USER_PROFILE = dbq.tables.UserProfile.USER_PROFILE;
+
+	/**
+	 * The table public.user_session
+	 */
+	public static final UserSession USER_SESSION = dbq.tables.UserSession.USER_SESSION;
 
 	/**
 	 * The table public.user_wine_list
@@ -74,6 +78,26 @@ public class Tables {
 	 * The table public.user_wine_review
 	 */
 	public static final UserWineReview USER_WINE_REVIEW = dbq.tables.UserWineReview.USER_WINE_REVIEW;
+
+	/**
+	 * The table public.v_user_cellar_list
+	 */
+	public static final VUserCellarList V_USER_CELLAR_LIST = dbq.tables.VUserCellarList.V_USER_CELLAR_LIST;
+
+	/**
+	 * The table public.v_user_review
+	 */
+	public static final VUserReview V_USER_REVIEW = dbq.tables.VUserReview.V_USER_REVIEW;
+
+	/**
+	 * The table public.v_user_wishlist
+	 */
+	public static final VUserWishlist V_USER_WISHLIST = dbq.tables.VUserWishlist.V_USER_WISHLIST;
+
+	/**
+	 * The table public.v_wine_detail
+	 */
+	public static final VWineDetail V_WINE_DETAIL = dbq.tables.VWineDetail.V_WINE_DETAIL;
 
 	/**
 	 * The table public.wine

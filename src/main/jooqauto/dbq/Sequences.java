@@ -22,6 +22,11 @@ public class Sequences {
 	public static final Sequence<Long> CATEGORIES_CATEGORIES_ID_SEQ = new SequenceImpl<Long>("categories_categories_id_seq", Public.PUBLIC, org.jooq.impl.SQLDataType.BIGINT.nullable(false));
 
 	/**
+	 * The sequence <code>public.cellar_list_sort</code>
+	 */
+	public static final Sequence<Long> CELLAR_LIST_SORT = new SequenceImpl<Long>("cellar_list_sort", Public.PUBLIC, org.jooq.impl.SQLDataType.BIGINT.nullable(false));
+
+	/**
 	 * The sequence <code>public.wine_master_wine_id_seq</code>
 	 */
 	public static final Sequence<Long> WINE_MASTER_WINE_ID_SEQ = new SequenceImpl<Long>("wine_master_wine_id_seq", Public.PUBLIC, org.jooq.impl.SQLDataType.BIGINT.nullable(false));

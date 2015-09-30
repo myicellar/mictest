@@ -8,6 +8,7 @@ import dbq.Public;
 
 import java.math.BigDecimal;
 import java.sql.Date;
+import java.util.UUID;
 
 import org.jooq.Field;
 import org.jooq.Record;
@@ -22,7 +23,7 @@ import org.jooq.impl.TableImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class UserWineReview extends TableImpl<Record> {
 
-	private static final long serialVersionUID = -1074322666;
+	private static final long serialVersionUID = 453077558;
 
 	/**
 	 * The reference instance of <code>public.user_wine_review</code>
@@ -40,7 +41,7 @@ public class UserWineReview extends TableImpl<Record> {
 	/**
 	 * The column <code>public.user_wine_review.user_id</code>.
 	 */
-	public final TableField<Record, Integer> USER_ID = createField("user_id", org.jooq.impl.SQLDataType.INTEGER, this, "");
+	public final TableField<Record, UUID> USER_ID = createField("user_id", org.jooq.impl.SQLDataType.UUID, this, "");
 
 	/**
 	 * The column <code>public.user_wine_review.wine_id</code>.
@@ -91,6 +92,11 @@ public class UserWineReview extends TableImpl<Record> {
 	 * The column <code>public.user_wine_review.finish</code>.
 	 */
 	public final TableField<Record, Integer> FINISH = createField("finish", org.jooq.impl.SQLDataType.INTEGER, this, "");
+
+	/**
+	 * The column <code>public.user_wine_review.sort_seq</code>.
+	 */
+	public final TableField<Record, Integer> SORT_SEQ = createField("sort_seq", org.jooq.impl.SQLDataType.INTEGER, this, "");
 
 	/**
 	 * Create a <code>public.user_wine_review</code> table reference

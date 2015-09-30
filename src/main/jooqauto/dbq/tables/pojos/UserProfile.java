@@ -5,6 +5,7 @@ package dbq.tables.pojos;
 
 
 import java.io.Serializable;
+import java.util.UUID;
 
 
 /**
@@ -13,18 +14,18 @@ import java.io.Serializable;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class UserProfile implements Serializable {
 
-	private static final long serialVersionUID = 542035769;
+	private static final long serialVersionUID = -458143869;
 
-	private final Integer userId;
-	private final String  username;
-	private final String  membership;
-	private final String  facebook;
-	private final String  wechat;
-	private final String  country;
-	private final String  language;
-	private final String  userBio;
-	private final String  url;
-	private final String  avatarImageUrl;
+	private final UUID   userId;
+	private final String username;
+	private final String membership;
+	private final String facebook;
+	private final String wechat;
+	private final String country;
+	private final String language;
+	private final String userBio;
+	private final String url;
+	private final String avatarImageUrl;
 
 	public UserProfile(UserProfile value) {
 		this.userId = value.userId;
@@ -40,16 +41,16 @@ public class UserProfile implements Serializable {
 	}
 
 	public UserProfile(
-		Integer userId,
-		String  username,
-		String  membership,
-		String  facebook,
-		String  wechat,
-		String  country,
-		String  language,
-		String  userBio,
-		String  url,
-		String  avatarImageUrl
+		UUID   userId,
+		String username,
+		String membership,
+		String facebook,
+		String wechat,
+		String country,
+		String language,
+		String userBio,
+		String url,
+		String avatarImageUrl
 	) {
 		this.userId = userId;
 		this.username = username;
@@ -63,7 +64,7 @@ public class UserProfile implements Serializable {
 		this.avatarImageUrl = avatarImageUrl;
 	}
 
-	public Integer getUserId() {
+	public UUID getUserId() {
 		return this.userId;
 	}
 

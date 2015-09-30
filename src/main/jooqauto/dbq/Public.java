@@ -10,10 +10,14 @@ import dbq.tables.CategoriesType;
 import dbq.tables.Country;
 import dbq.tables.Grape;
 import dbq.tables.UserAcct;
-import dbq.tables.UserCellarList;
 import dbq.tables.UserProfile;
+import dbq.tables.UserSession;
 import dbq.tables.UserWineList;
 import dbq.tables.UserWineReview;
+import dbq.tables.VUserCellarList;
+import dbq.tables.VUserReview;
+import dbq.tables.VUserWishlist;
+import dbq.tables.VWineDetail;
 import dbq.tables.Wine;
 import dbq.tables.WineMaster;
 import dbq.tables.WineRating;
@@ -39,7 +43,7 @@ import org.jooq.impl.SchemaImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class Public extends SchemaImpl {
 
-	private static final long serialVersionUID = 353592622;
+	private static final long serialVersionUID = 319499182;
 
 	/**
 	 * The reference instance of <code>public</code>
@@ -63,6 +67,7 @@ public class Public extends SchemaImpl {
 	private final List<Sequence<?>> getSequences0() {
 		return Arrays.<Sequence<?>>asList(
 			Sequences.CATEGORIES_CATEGORIES_ID_SEQ,
+			Sequences.CELLAR_LIST_SORT,
 			Sequences.WINE_MASTER_WINE_ID_SEQ);
 	}
 
@@ -80,10 +85,14 @@ public class Public extends SchemaImpl {
 			Country.COUNTRY,
 			Grape.GRAPE,
 			UserAcct.USER_ACCT,
-			UserCellarList.USER_CELLAR_LIST,
 			UserProfile.USER_PROFILE,
+			UserSession.USER_SESSION,
 			UserWineList.USER_WINE_LIST,
 			UserWineReview.USER_WINE_REVIEW,
+			VUserCellarList.V_USER_CELLAR_LIST,
+			VUserReview.V_USER_REVIEW,
+			VUserWishlist.V_USER_WISHLIST,
+			VWineDetail.V_WINE_DETAIL,
 			Wine.WINE,
 			Winedata1.WINEDATA1,
 			WineMaster.WINE_MASTER,

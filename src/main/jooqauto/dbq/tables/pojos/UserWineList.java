@@ -6,6 +6,7 @@ package dbq.tables.pojos;
 
 import java.io.Serializable;
 import java.sql.Timestamp;
+import java.util.UUID;
 
 
 /**
@@ -14,13 +15,14 @@ import java.sql.Timestamp;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class UserWineList implements Serializable {
 
-	private static final long serialVersionUID = 676068828;
+	private static final long serialVersionUID = -298041063;
 
-	private final Integer   userId;
+	private final UUID      userId;
 	private final Integer   wineId;
 	private final String    listType;
 	private final Integer   currentQty;
 	private final Timestamp lastUpdate;
+	private final Integer   sortSeq;
 
 	public UserWineList(UserWineList value) {
 		this.userId = value.userId;
@@ -28,23 +30,26 @@ public class UserWineList implements Serializable {
 		this.listType = value.listType;
 		this.currentQty = value.currentQty;
 		this.lastUpdate = value.lastUpdate;
+		this.sortSeq = value.sortSeq;
 	}
 
 	public UserWineList(
-		Integer   userId,
+		UUID      userId,
 		Integer   wineId,
 		String    listType,
 		Integer   currentQty,
-		Timestamp lastUpdate
+		Timestamp lastUpdate,
+		Integer   sortSeq
 	) {
 		this.userId = userId;
 		this.wineId = wineId;
 		this.listType = listType;
 		this.currentQty = currentQty;
 		this.lastUpdate = lastUpdate;
+		this.sortSeq = sortSeq;
 	}
 
-	public Integer getUserId() {
+	public UUID getUserId() {
 		return this.userId;
 	}
 
@@ -62,5 +67,9 @@ public class UserWineList implements Serializable {
 
 	public Timestamp getLastUpdate() {
 		return this.lastUpdate;
+	}
+
+	public Integer getSortSeq() {
+		return this.sortSeq;
 	}
 }

@@ -6,6 +6,7 @@ package dbq.tables.pojos;
 
 import java.io.Serializable;
 import java.sql.Timestamp;
+import java.util.UUID;
 
 
 /**
@@ -14,9 +15,9 @@ import java.sql.Timestamp;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class UserAcct implements Serializable {
 
-	private static final long serialVersionUID = -1507699025;
+	private static final long serialVersionUID = -1704615029;
 
-	private final Integer   id;
+	private final UUID      id;
 	private final String    email;
 	private final String    password;
 	private final Timestamp lastLogin;
@@ -31,7 +32,7 @@ public class UserAcct implements Serializable {
 	}
 
 	public UserAcct(
-		Integer   id,
+		UUID      id,
 		String    email,
 		String    password,
 		Timestamp lastLogin,
@@ -44,7 +45,7 @@ public class UserAcct implements Serializable {
 		this.isVerified = isVerified;
 	}
 
-	public Integer getId() {
+	public UUID getId() {
 		return this.id;
 	}
 
